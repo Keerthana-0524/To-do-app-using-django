@@ -1,0 +1,112 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block title %}Add Todo{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title">Add Todo</h1>
+        <form method="post" class="todo-form">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label for="id_title" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    {{ form.title }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="id_description" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    {{ form.description }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="id_deadline" class="col-sm-2 col-form-label">Deadline</label>
+                <div class="col-sm-10">
+                    <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker" id="id_deadline" name="deadline"/>
+                        <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap Datepicker and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Datepicker initialization -->
+    <script>
+        $(document).ready(function () {
+            $('#datetimepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayBtn: true,
+                clearBtn: true,
+                todayHighlight: true
+            });
+        });
+    </script>
+
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Container styling */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: linear-gradient(to right, #e0f2f1, #b2dfdb); /* Lighter gradient background */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title styling */
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form elements styling */
+        .mb-3 {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-control {
+            border-color: #ccc;
+            border-radius: 4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background-color: #66cccc; /* Pastel blue-green */
+            border-color: #66cccc; /* Matching border color */
+            color: #fff; /* White text */
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold; /* Bold text */
+        }
+
+        .btn-primary:hover {
+            background-color: #5cb8b2; /* Darker shade on hover */
+            border-color: #5cb8b2; /* Darker shade border on hover */
+        }
+    </style>
+{% endblock %}
